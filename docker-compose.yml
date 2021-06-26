@@ -1,0 +1,38 @@
+version: "3"
+
+services:
+  ghost:
+    image: ghost:3
+    restart: always
+    environment:
+      - url="https://argonaut.network"
+    networks:
+      - proxy
+    labels:
+      - "traefik.enable=true"
+      
+      # Accept HTTP and upgrade to HTTPS
+      - "traefik.http.routers.ghost-cms-argonaut-network.entrypoints=http"
+      - "traefik.http.routers.ghost-cms-argonaut-network.rule=HostHeader(`argonaut.network`)"
+      - "traefik.http.routers.ghost-cms-argonaut-network.rule=Host(`argonaut.network`)"
+      - "traefik.http.middlewares.ghost-cms-argonaut-network-https-redirect.redirectscheme.scheme=https"
+      - "traefik.http.routers.ghost-cms-argonaut-network.middlewares=ghost-cms-argonaut-network-https-redirect"
+      
+      # Define secure entry point
+      - "traefik.http.routers.ghost-cms-argonaut-network-secure.entrypoints=https"
+      - "traefik.http.routers.ghost-cms-argonaut-network-secure.rule=HostHeader(`argonaut.network`)"
+      - "traefik.http.routers.ghost-cms-argonaut-network-secure.rule=Host(`argonaut.network`)"
+      - "traefik.http.routers.ghost-cms-argonaut-network-secure.tls=true"
+      - "traefik.http.routers.ghost-cms-argonaut-network-secure.tls.certresolver=http"
+      
+      # Attach this container to the reverse proxy network.
+      - "traefik.docker.network=proxy"
+      
+      - "com.centurylinklabs.watchtower.enable=true"
+    
+    volumes:
+      - /var/lib/ghost/content:/var/lib/ghost/content
+
+networks:
+  proxy:
+    external: true
