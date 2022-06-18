@@ -23,8 +23,8 @@ services:
       #- "traefik.http.routers.ghost-cms-argonaut-network-secure.rule=HostHeader(`argonaut.network`)"
       - "traefik.http.routers.ghost-cms-argonaut-network.rule=Host(`argonaut.network`)"
       - "traefik.http.routers.ghost-cms-argonaut-network.tls=true"
-      #- "traefik.http.routers.ghost-cms-argonaut-network-secure.tls.certresolver=http"
-      - "traefik.http.services.reverse-proxy.loadbalancer.server.port=8080"
+      - "traefik.http.routers.ghost-cms-argonaut-network.tls.certresolver=cloudflare"
+      - "traefik.http.services.ghost-cms-argonaut-network.loadbalancer.server.port=8080"
       
       # Attach this container to the reverse reverse-proxy network.
       - "traefik.docker.network=reverse-proxy"
