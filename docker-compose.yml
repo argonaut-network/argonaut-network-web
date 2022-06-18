@@ -27,7 +27,7 @@ services:
       - "traefik.http.services.reverse-proxy.loadbalancer.server.port=8080"
       
       # Attach this container to the reverse reverse-proxy network.
-      #- "traefik.docker.network=reverse-proxy"
+      - "traefik.docker.network=reverse-proxy"
       
       - "com.centurylinklabs.watchtower.enable=true"
     
