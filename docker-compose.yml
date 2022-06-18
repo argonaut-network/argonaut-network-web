@@ -5,7 +5,7 @@ services:
     image: ghost:3
     restart: always
     environment:
-      - url="websecure://argonaut.network"
+      - url="https://argonaut.network"
     networks:
       - reverse-proxy
     labels:
@@ -24,6 +24,7 @@ services:
       - "traefik.http.routers.ghost-cms-argonaut-network.rule=Host(`argonaut.network`)"
       #- "traefik.http.routers.ghost-cms-argonaut-network-secure.tls=true"
       #- "traefik.http.routers.ghost-cms-argonaut-network-secure.tls.certresolver=http"
+      - "traefik.http.services.reverse-proxy.loadbalancer.server.port=8080"
       
       # Attach this container to the reverse reverse-proxy network.
       #- "traefik.docker.network=reverse-proxy"
