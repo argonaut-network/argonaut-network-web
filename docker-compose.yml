@@ -11,7 +11,7 @@ services:
       - /var/lib/ghost/content:/var/lib/ghost/content
     labels:
     - traefik.enable=true
-    - traefik.http.routers.ghost-cms-argonaut-network-secure.entrypoints=websecure
+    - traefik.http.routers.ghost-cms-argonaut-network-secure.entrypoints=https
     - traefik.http.routers.ghost-cms-argonaut-network-secure.rule=Host(`argonaut.network`)
     - traefik.http.routers.ghost-cms-argonaut-network-secure.tls=true
 
