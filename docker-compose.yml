@@ -13,7 +13,7 @@ services:
     - traefik.enable=true
     - traefik.http.routers.ghost-cms-argonaut-network-secure.entrypoints=websecure
     - traefik.http.routers.ghost-cms-argonaut-network-secure.rule=Host(`argonaut.network`)
-    #- traefik.http.routers.ghost-cms-argonaut-network-secure.tls=true
+    - traefik.http.routers.ghost-cms-argonaut-network-secure.tls=true
 
     - com.centurylinklabs.watchtower.enable=true
 
