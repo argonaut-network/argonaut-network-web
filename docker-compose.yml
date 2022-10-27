@@ -2,6 +2,7 @@ version: "3"
 
 services:
   ghost:
+    restart: always
     image: ghost:3
     environment:
       - url="https://argonaut.network"
